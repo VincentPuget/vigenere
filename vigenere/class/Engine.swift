@@ -20,7 +20,7 @@ class Engine: NSObject {
     var delegate:EngineProtocol!
     var isOk:Bool! = false;
     
-    var matrixObj:Matrix!
+    var matrixObj:Matrix?
     var source:Array<String>!;
     var matrix:Array<Array<String>>!;
     
@@ -64,7 +64,7 @@ class Engine: NSObject {
         }
     }
     
-    func getMatrixObject() -> Matrix
+    func getMatrixObject() -> Matrix?
     {
         let matrixObjTmp:Matrix! = DataSingleton.instance.getMatrixObject()
         return matrixObjTmp
@@ -73,7 +73,7 @@ class Engine: NSObject {
     func createSource() -> Array<String>
     {
         //transform string to array
-        var sourceTmp:Array<String>! = map(self.matrixObj.matrix) { s -> String in String(s) }
+        var sourceTmp:Array<String>! = map(self.matrixObj!.matrix) { s -> String in String(s) }
         //on ajoute les sauts de ligne à la main... pas trouver d'autre méthode pour le moment.
         sourceTmp.append("\r");
         sourceTmp.append("\n");

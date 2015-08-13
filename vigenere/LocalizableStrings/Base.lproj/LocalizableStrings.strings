@@ -15,3 +15,5 @@
 "matrixName" = "Nom de la matrice";
 "save" = "ENREGISTRER";
 "cancel" = "ANNULER";
+"ok" = "OK";
+"alertMatrixIsEmpty" = "Votre matrice de cryptage est vide, veuillez la remplir !";

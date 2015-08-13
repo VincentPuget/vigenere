@@ -15,3 +15,5 @@
 "matrixName" = "Matrix name";
 "save" = "SAVE";
 "cancel" = "CANCEL";
+"ok" = "OK";
+"alertMatrixIsEmpty" = "Your matrix is empty ! Please fill it";

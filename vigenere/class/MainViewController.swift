@@ -67,16 +67,16 @@ class MainViewController: NSViewController {
         self.view.window?.title = "Vigenere"
         self.view.window?.movableByWindowBackground = true
         
+        engine = Engine()
+        engine.delegate = self;
+        engine.startCreateMatrixProcess();
+        
 //        ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz@&é"'(§è!çà)-_°0987654321#$ù%=+:/;.,?\âêûîôäëüïöÂÊÛÎÔÄËÜÏÖ£`’ €÷*|
 //        DataSingleton.instance.dropAllMatrix()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        engine = Engine()
-        engine.delegate = self;
-        engine.startCreateMatrixProcess();
         
         self.tvInput.delegate = self
         self.tfKey.delegate = self
@@ -126,16 +126,16 @@ extension MainViewController {
     func alertMatrixEmpty()
     {
         let alert: NSAlert = NSAlert()
-        alert.messageText = "Votre matrice de cryptage est vide, veuillez la remplir !"
+        alert.messageText = NSLocalizedString("alertMatrixIsEmpty", tableName: "LocalizableStrings", comment: "alertMatrixIsEmpty")
         alert.informativeText = "Vigenere"
         alert.alertStyle = NSAlertStyle.WarningAlertStyle
-        alert.addButtonWithTitle("Ok")
-        alert.addButtonWithTitle("Annuler")
+        alert.addButtonWithTitle(NSLocalizedString("ok", tableName: "LocalizableStrings", comment: "ok"))
+        alert.addButtonWithTitle(NSLocalizedString("cancel", tableName: "LocalizableStrings", comment: "cancel"))
         let response = alert.runModal()
         
         if(response == NSAlertFirstButtonReturn)
         {
-            self.buttonMatrix.performClick(self)
+            self.performSegueWithIdentifier("segue_MatrixViewController", sender: self)
         }
         else if(response == NSAlertSecondButtonReturn)
         {
@@ -179,6 +179,7 @@ extension MainViewController: EngineProtocol{
     func matrixNotExist()
     {
         L.v("matrixIsEmpty");
+        self.alertMatrixEmpty()
     }
     
     func matrixIsCreated()

@@ -28,7 +28,6 @@ class MainViewController: NSViewController {
     var textKey: String!
     var isEncryp: Bool! = true
     
-    
     override func viewWillAppear() {
         self.view.wantsLayer = true
         self.view.layer?.backgroundColor = NSColor(calibratedRed: 69/255, green: 69/255, blue: 69/255, alpha: 1).CGColor
@@ -70,9 +69,6 @@ class MainViewController: NSViewController {
         engine = Engine()
         engine.delegate = self;
         engine.startCreateMatrixProcess();
-        
-//        ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz@&é"'(§è!çà)-_°0987654321#$ù%=+:/;.,?\âêûîôäëüïöÂÊÛÎÔÄËÜÏÖ£`’ €÷*|
-//        DataSingleton.instance.dropAllMatrix()
     }
     
     override func viewDidLoad() {

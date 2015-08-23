@@ -1,9 +1,6 @@
 # vigenere
 Encrypt and decrypt text from with vigenere algorithm
 
-## Installation
-Drag ./bin/vigenere.app in your app folder.
-
 ## Firt launch
 At first launch, the reference matrix for encrypt and decrypt is empty.
 Click on matrix button. An pop up window will appear.
@@ -20,9 +17,6 @@ ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz@&é"'(§è!çà)-_°0987654
 Select encrypt or decrypt mode.
 Set a key of encryption.
 type the text to be encrypted
-
-## Development
-Developed by MrP
 
 ## Design
 Designed by Aurélien HERVÉ

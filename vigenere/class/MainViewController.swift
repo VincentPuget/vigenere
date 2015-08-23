@@ -21,6 +21,8 @@ class MainViewController: NSViewController {
     @IBOutlet weak var tfKey: NSTextField!
     
     @IBOutlet weak var splitView: NSSplitView!
+    @IBOutlet weak var svLeft: NSScrollView!
+    @IBOutlet weak var svRight: NSScrollView!
     
     var engine:Engine!
     
@@ -59,8 +61,9 @@ class MainViewController: NSViewController {
         self.buttonQuit.attributedTitle = NSAttributedString(string: NSLocalizedString("x", tableName: "LocalizableStrings", comment: "x"), attributes: [ NSForegroundColorAttributeName : NSColor.whiteColor(), NSParagraphStyleAttributeName : pstyle ])
         self.buttonMatrix.attributedTitle = NSAttributedString(string: NSLocalizedString("matrix", tableName: "LocalizableStrings", comment: "Matrix"), attributes: [ NSForegroundColorAttributeName : NSColor.whiteColor(), NSParagraphStyleAttributeName : pstyle ])
         
+
     }
-    
+
     override func viewDidAppear() {
         super.viewDidAppear()
         self.view.window?.title = "Vigenere"

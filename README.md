@@ -16,7 +16,7 @@ ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz@&é"'(§è!çà)-_°0987654
 ## Use
 Select encrypt or decrypt mode.
 Set a key of encryption.
-type the text to be encrypted
+Type the text to be encrypted
 
 ## Design
 Designed by Aurélien HERVÉ

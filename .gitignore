@@ -31,11 +31,10 @@ DerivedData
 # Carthage/Checkouts
 
 Carthage/Build
-<<<<<<< HEAD
-=======
 
 #OS folders
 .DS_Store
 .AppleDouble
 Thumbs.db
->>>>>>> First commit
+
+/bin

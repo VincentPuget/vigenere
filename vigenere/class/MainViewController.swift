@@ -60,8 +60,6 @@ class MainViewController: NSViewController {
         pstyle.alignment = NSTextAlignment.CenterTextAlignment
         self.buttonQuit.attributedTitle = NSAttributedString(string: NSLocalizedString("x", tableName: "LocalizableStrings", comment: "x"), attributes: [ NSForegroundColorAttributeName : NSColor.whiteColor(), NSParagraphStyleAttributeName : pstyle ])
         self.buttonMatrix.attributedTitle = NSAttributedString(string: NSLocalizedString("matrix", tableName: "LocalizableStrings", comment: "Matrix"), attributes: [ NSForegroundColorAttributeName : NSColor.whiteColor(), NSParagraphStyleAttributeName : pstyle ])
-        
-
     }
 
     override func viewDidAppear() {

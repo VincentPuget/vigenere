@@ -42,11 +42,11 @@ class MatrixViewController: NSViewController {
         let placeHolderStr = NSAttributedString(string: NSLocalizedString("matrixName", tableName: "LocalizableStrings", comment: "Matrix name"), attributes: attrs)
         self.tfMatrixName.placeholderAttributedString = placeHolderStr
         self.tfMatrixName.focusRingType = NSFocusRingType.None
-        var fieldEditor: NSTextView! = self.tfMatrixName.window?.fieldEditor(true, forObject: self.tfMatrixName) as! NSTextView
+        let fieldEditor: NSTextView! = self.tfMatrixName.window?.fieldEditor(true, forObject: self.tfMatrixName) as! NSTextView
         fieldEditor.insertionPointColor = NSColor.whiteColor()
         
         let pstyle = NSMutableParagraphStyle()
-        pstyle.alignment = NSTextAlignment.CenterTextAlignment
+        pstyle.alignment = NSTextAlignment.Center
         self.buttonValidate.attributedTitle = NSAttributedString(string: NSLocalizedString("save", tableName: "LocalizableStrings", comment: "Save"), attributes: [ NSForegroundColorAttributeName : NSColor.whiteColor(), NSParagraphStyleAttributeName : pstyle ])
         self.buttonCancel.attributedTitle = NSAttributedString(string: NSLocalizedString("cancel", tableName: "LocalizableStrings", comment: "Cancel"), attributes: [ NSForegroundColorAttributeName : NSColor.whiteColor(), NSParagraphStyleAttributeName : pstyle ])
         

@@ -73,7 +73,7 @@ class Engine: NSObject {
     func createSource() -> Array<String>
     {
         //transform string to array
-        var sourceTmp:Array<String>! = map(self.matrixObj!.matrix) { s -> String in String(s) }
+        var sourceTmp:Array<String>! = self.matrixObj!.matrix.characters.map { s -> String in String(s) }
         //on ajoute les sauts de ligne à la main... pas trouver d'autre méthode pour le moment.
         sourceTmp.append("\r");
         sourceTmp.append("\n");
@@ -103,23 +103,21 @@ class Engine: NSObject {
     }
     
     func createMatrix(source:Array<String>) -> Array<Array<String>> {
-        var i:Int = 0
-        var incJ:Int = 0
-        var nbRowSource:Int = source.count
+        let nbRowSource:Int = source.count
         
         var matrix:Array<Array<String>> = Array<Array<String>>()
         
-        for i ; i < nbRowSource; i++
+        var incJ:Int = 0
+        
+        for var i:Int = 0 ; i < nbRowSource; i++
         {
             var matrixTmp:Array<String> = Array<String>()
-            var j:Int = incJ
-            
-            for j ; j < source.count ; j++
+            for var j:Int = incJ ; j < source.count ; j++
             {
                 matrixTmp.append(source[j])
             }
             
-            var delta:Int = nbRowSource - (nbRowSource - incJ)
+            let delta:Int = nbRowSource - (nbRowSource - incJ)
             if(delta > 0)
             {
                 for var k:Int = 0 ; k < delta ; k++
@@ -137,9 +135,9 @@ class Engine: NSObject {
     
     func encrypt(str:String , key:String) -> String {
         
-        let arrayStrToEncrypt:Array<String> = map(str) { String($0) }
+        let arrayStrToEncrypt:Array<String> = str.characters.map { String($0) }
         
-        let arrayKey:Array<String> = map(key) { String($0) }
+        let arrayKey:Array<String> = key.characters.map { String($0) }
         
         var strCrypted:String = ""
         
@@ -148,7 +146,7 @@ class Engine: NSObject {
         for var i:Int = 0 ; i < arrayStrToEncrypt.count ; i++
         {
             //On récupère l'index de la première lettre de la clé dans le tableau source
-            var indexKey:Int! = find(self.source , arrayKey[incKey])
+            let indexKey:Int! = self.source.indexOf(arrayKey[incKey])
             if(indexKey == nil)
             {
                 return "ERREUR KEY, un caractère à crypter n'est pas dans la matrice."
@@ -158,7 +156,7 @@ class Engine: NSObject {
             var rowMatrix:Array<String> = self.matrix[indexKey]
             
             //On récupère l'index de la première lettre de la phrase à crypté dans le tableau source
-            var indexStr:Int! = find(self.source , arrayStrToEncrypt[i]);
+            let indexStr:Int! = self.source.indexOf(arrayStrToEncrypt[i]);
             
             if(indexStr == nil)
             {
@@ -166,7 +164,7 @@ class Engine: NSObject {
             }
             
             //on récupère la valeur de cette lettre dans le tableau fournis par l'index de la clé
-            var letterCrypted:String! = rowMatrix[indexStr]
+            let letterCrypted:String! = rowMatrix[indexStr]
             
             strCrypted += letterCrypted
             
@@ -183,9 +181,9 @@ class Engine: NSObject {
     }
     
     func decrypt(str:String , key:String) -> String {
-        let arrayStrToDecrypt:Array<String> = map(str) { String($0) }
+        let arrayStrToDecrypt:Array<String> = str.characters.map { String($0) }
         
-        let arrayKey:Array<String> = map(key) { String($0) }
+        let arrayKey:Array<String> = key.characters.map { String($0) }
         
         var strDecrypted:String = ""
         
@@ -194,24 +192,24 @@ class Engine: NSObject {
         for var i:Int = 0 ; i < arrayStrToDecrypt.count ; i++
         {
             //On récupère l'index de la première lettre de la clé dans le tableau source
-            var indexKey:Int! = find(self.source , arrayKey[incKey])
+            let indexKey:Int! = self.source.indexOf(arrayKey[incKey])
             if(indexKey == nil)
             {
                 return "ERREUR, un caractère à crypter n'est pas dans la matrice."
             }
             
             //on récupère la ligne de la matrix (un tableau) correspond à l'index de la première lettre de la clé dans le tableau source
-            var rowMatrix:Array<String> = self.matrix[indexKey]
+            let rowMatrix:Array<String> = self.matrix[indexKey]
             
             //On récupère l'index de la lettre de la phrase à decrypté dans le tableau fournis par l'index de la clé
-            var indexStr:Int! = find(rowMatrix , arrayStrToDecrypt[i])
+            let indexStr:Int! = rowMatrix.indexOf(arrayStrToDecrypt[i])
             if(indexStr == nil)
             {
                 return "ERREUR, un caractère à crypter n'est pas dans la matrice."
             }
             
             //on récupère la valeur de cette lettre dans le tableau source
-            var letterDecrypted:String! = self.source[indexStr]
+            let letterDecrypted:String! = self.source[indexStr]
             
             strDecrypted += letterDecrypted
             

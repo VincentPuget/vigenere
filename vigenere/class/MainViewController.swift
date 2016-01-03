@@ -48,7 +48,7 @@ class MainViewController: NSViewController {
         let placeHolderStr = NSAttributedString(string: NSLocalizedString("key", tableName: "LocalizableStrings", comment: "key"), attributes: attrs)
         self.tfKey.placeholderAttributedString = placeHolderStr
         self.tfKey.focusRingType = NSFocusRingType.None
-        var fieldEditor: NSTextView! = self.tfKey.window?.fieldEditor(true, forObject: self.tfKey) as! NSTextView
+        let fieldEditor: NSTextView! = self.tfKey.window?.fieldEditor(true, forObject: self.tfKey) as! NSTextView
         fieldEditor.insertionPointColor = NSColor.whiteColor()
         
         self.tvInput.string = NSLocalizedString("textHere", tableName: "LocalizableStrings", comment: "textHere")
@@ -57,11 +57,9 @@ class MainViewController: NSViewController {
         self.tvOutput.insertionPointColor = NSColor.whiteColor()
         
         let pstyle = NSMutableParagraphStyle()
-        pstyle.alignment = NSTextAlignment.CenterTextAlignment
+        pstyle.alignment = NSTextAlignment.Center
         self.buttonQuit.attributedTitle = NSAttributedString(string: NSLocalizedString("x", tableName: "LocalizableStrings", comment: "x"), attributes: [ NSForegroundColorAttributeName : NSColor.whiteColor(), NSParagraphStyleAttributeName : pstyle ])
         self.buttonMatrix.attributedTitle = NSAttributedString(string: NSLocalizedString("matrix", tableName: "LocalizableStrings", comment: "Matrix"), attributes: [ NSForegroundColorAttributeName : NSColor.whiteColor(), NSParagraphStyleAttributeName : pstyle ])
-        
-
     }
 
     override func viewDidAppear() {
@@ -92,7 +90,7 @@ class MainViewController: NSViewController {
     {
         if (segue.identifier == "segue_MatrixViewController")
         {
-            var matrixViewController:MatrixViewController! = segue.destinationController as! MatrixViewController;
+            let matrixViewController:MatrixViewController! = segue.destinationController as! MatrixViewController;
             matrixViewController.delegate = self
         }//fin if
     }

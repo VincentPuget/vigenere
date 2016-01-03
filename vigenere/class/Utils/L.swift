@@ -16,7 +16,7 @@ struct L
         {
             for anyObject:AnyObject! in anyObjects
             {
-                println(anyObject);
+                print(anyObject);
             }
         }
     }

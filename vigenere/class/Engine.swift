@@ -103,18 +103,16 @@ class Engine: NSObject {
     }
     
     func createMatrix(source:Array<String>) -> Array<Array<String>> {
-        var i:Int = 0
-        var incJ:Int = 0
         let nbRowSource:Int = source.count
         
         var matrix:Array<Array<String>> = Array<Array<String>>()
         
-        for i ; i < nbRowSource; i++
+        var incJ:Int = 0
+        
+        for var i:Int = 0 ; i < nbRowSource; i++
         {
             var matrixTmp:Array<String> = Array<String>()
-            var j:Int = incJ
-            
-            for j ; j < source.count ; j++
+            for var j:Int = incJ ; j < source.count ; j++
             {
                 matrixTmp.append(source[j])
             }

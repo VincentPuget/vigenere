@@ -158,7 +158,7 @@ class Engine: NSObject {
             let indexKey:Int! = self.source.indexOf(arrayKey[incKey])
             if(indexKey == nil)
             {
-                return "Waring : un caractère à crypter n'est pas dans la matrice."
+                return NSLocalizedString("warningMissingCharMatrix", tableName: "LocalizableStrings", comment: "warningMissingCharMatrix")
             }
             
             //on récupère la ligne de la matrix (un tableau) correspond à l'index de la première lettre de la clé dans le tableau source
@@ -169,7 +169,7 @@ class Engine: NSObject {
             
             if(indexStr == nil)
             {
-                return "Warning : un caractère à crypter n'est pas dans la matrice."
+                return NSLocalizedString("warningMissingCharMatrix", tableName: "LocalizableStrings", comment: "warningMissingCharMatrix")
             }
             
             //on récupère la valeur de cette lettre dans le tableau fournis par l'index de la clé
@@ -204,7 +204,7 @@ class Engine: NSObject {
             let indexKey:Int! = self.source.indexOf(arrayKey[incKey])
             if(indexKey == nil)
             {
-                return "ERREUR, un caractère à crypter n'est pas dans la matrice."
+                return NSLocalizedString("warningMissingCharMatrix", tableName: "LocalizableStrings", comment: "warningMissingCharMatrix")
             }
             
             //on récupère la ligne de la matrix (un tableau) correspond à l'index de la première lettre de la clé dans le tableau source
@@ -214,7 +214,7 @@ class Engine: NSObject {
             let indexStr:Int! = rowMatrix.indexOf(arrayStrToDecrypt[i])
             if(indexStr == nil)
             {
-                return "ERREUR, un caractère à crypter n'est pas dans la matrice."
+                return NSLocalizedString("warningMissingCharMatrix", tableName: "LocalizableStrings", comment: "warningMissingCharMatrix")
             }
             
             //on récupère la valeur de cette lettre dans le tableau source

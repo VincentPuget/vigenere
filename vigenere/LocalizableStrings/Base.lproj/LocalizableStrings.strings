@@ -17,3 +17,4 @@
 "cancel" = "ANNULER";
 "ok" = "OK";
 "alertMatrixIsEmpty" = "Votre matrice de cryptage est vide, veuillez la remplir !";
+"warningMissingCharMatrix" = "Waring : un caractère à crypter n'est pas dans la matrice.";

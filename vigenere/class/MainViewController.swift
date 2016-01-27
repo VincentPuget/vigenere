@@ -28,7 +28,7 @@ class MainViewController: NSViewController {
     
     var textInput: String!
     var textKey: String!
-    var isEncryp: Bool! = true
+    var isEncrypt: Bool! = true
     
     override func viewWillAppear() {
         self.view.wantsLayer = true
@@ -101,16 +101,16 @@ class MainViewController: NSViewController {
         switch scTmp.selectedSegment
         {
             case 0:
-                self.isEncryp = true
+                self.isEncrypt = true
                 break;
             case 1:
-                self.isEncryp = false
+                self.isEncrypt = false
                 break;
             default:
                 break;
         }
         
-        engine.encryptOrDecrypt(self.textInput, key: self.textKey , isEncrypt: self.isEncryp)
+        engine.encryptOrDecrypt(self.textInput, key: self.textKey , isEncrypt: self.isEncrypt)
     }
     
     @IBAction func IBA_buttonQuit(sender: AnyObject) {
@@ -149,7 +149,7 @@ extension MainViewController {
             let tvTmp = obj.object as! NSTextView;
             self.textInput = tvTmp.textStorage?.string
         }
-        engine.encryptOrDecrypt(self.textInput, key: self.textKey , isEncrypt: self.isEncryp)
+        engine.encryptOrDecrypt(self.textInput, key: self.textKey , isEncrypt: self.isEncrypt)
     }
     
 }
@@ -184,7 +184,7 @@ extension MainViewController: EngineProtocol{
         //animate view ??
         //activate field ??
         //en loading ??
-        engine.encryptOrDecrypt(self.textInput, key: self.textKey , isEncrypt: self.isEncryp)
+        engine.encryptOrDecrypt(self.textInput, key: self.textKey , isEncrypt: self.isEncrypt)
     }
     
     func outputUpdated(output:String!)

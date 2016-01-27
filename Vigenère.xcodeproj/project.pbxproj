@@ -52,6 +52,7 @@
 		8A6F8E921B7CCCB200E731C2 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		8A6F8E951B7CCCB200E731C2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		8A6F8E961B7CCCB200E731C2 /* vigenere-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "vigenere-Bridging-Header.h"; sourceTree = "<group>"; };
+		8AA57A111C5541D200AFD86E /* Vigenère.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "Vigenère.entitlements"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,6 +76,7 @@
 		8A6F8E521B7CCC5100E731C2 = {
 			isa = PBXGroup;
 			children = (
+				8AA57A111C5541D200AFD86E /* Vigenère.entitlements */,
 				8A6F8E5D1B7CCC5100E731C2 /* vigenere */,
 				8A6F8E731B7CCC5100E731C2 /* vigenereTests */,
 				8A6F8E5C1B7CCC5100E731C2 /* Products */,
@@ -236,6 +238,11 @@
 					8A6F8E5A1B7CCC5100E731C2 = {
 						CreatedOnToolsVersion = 6.4;
 						DevelopmentTeam = G6Y46S4A8Y;
+						SystemCapabilities = {
+							com.apple.Sandbox = {
+								enabled = 1;
+							};
+						};
 					};
 					8A6F8E6F1B7CCC5100E731C2 = {
 						CreatedOnToolsVersion = 6.4;
@@ -423,6 +430,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "Vigenère.entitlements";
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
@@ -439,8 +447,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application";
-				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "3rd Party Mac Developer Application";
+				CODE_SIGN_ENTITLEMENTS = "Vigenère.entitlements";
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = vigenere/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";

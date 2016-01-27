@@ -27,17 +27,25 @@ class Engine: NSObject {
     override init()
     {
         super.init();
-        
-        //self.startCreateMatrixProcess()
     }
     
     func startCreateMatrixProcess()
     {
+//        DataSingleton.instance.dropAllMatrix();
+        
         self.matrixObj = self.getMatrixObject()
         
         if(self.matrixObj == nil)
         {
-            self.delegate.matrixNotExist()
+            if(DataSingleton.instance.createDefaultMatrix()){
+                self.startCreateMatrixProcess()
+            }
+        }
+        else if(self.matrixObj != nil && (self.matrixObj?.matrix == "" || self.matrixObj?.matrix == nil))
+        {
+            if(DataSingleton.instance.setDefaultMatrix(self.matrixObj)){
+                self.startCreateMatrixProcess()
+            }
         }
         else
         {
@@ -63,6 +71,7 @@ class Engine: NSObject {
             }
         }
     }
+
     
     func getMatrixObject() -> Matrix?
     {

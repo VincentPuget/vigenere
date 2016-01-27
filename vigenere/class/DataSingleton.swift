@@ -9,14 +9,8 @@
 import Cocoa
 import CoreData
 
-protocol DataSingletonProtocol
-{
-    func playListUpdated()
-}
-
 class DataSingleton: NSObject
 {
-    var delegate:DataSingletonProtocol!;
     
     class var instance : DataSingleton
     {
@@ -55,6 +49,16 @@ class DataSingleton: NSObject
         {
             L.v("DROP Matrix OK")
         }
+    }
+    
+    func createDefaultMatrix() -> Bool
+    {
+        return DataSingleton.instance.saveNewMatrix("Matrice1", matrix: "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz@&é\"'(§è!çà)-_°0987654321#$ù%=+:/;.,?\\âêûîôäëüïöÂÊÛÎÔÄËÜÏÖ£`’ €÷*|")
+    }
+    
+    func setDefaultMatrix(matrixObj:Matrix!) -> Bool
+    {
+        return DataSingleton.instance.saveThisMatrix(matrixObj, name: matrixObj.name, matrix: "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz@&é\"'(§è!çà)-_°0987654321#$ù%=+:/;.,?\\âêûîôäëüïöÂÊÛÎÔÄËÜÏÖ£`’ €÷*|")
     }
     
     func getMatrixObject() -> Matrix?
@@ -293,10 +297,6 @@ class DataSingleton: NSObject
         }
         // If we got here, it is time to quit.
         return .TerminateNow
-    }
-    
-    deinit {
-        self.delegate = nil;
     }
     
 }

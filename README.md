@@ -9,7 +9,7 @@ Click on save button to save the matrix.
 
 Example of matrix
 ```text
-ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz@&é"'(§è!çà)-_°0987654321#$ù%=+:/;.,?\âêûîôäëüïöÂÊÛÎÔÄËÜÏÖ£`’ €÷*|
+ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz@&é"'(§è!çà)-_°0987654321#$ù%=+:/;.,?\âêûîôäëüïöÂÊÛÎÔÄËÜÏÖ£`’ €÷*|~⇒…{}[]
 ```
 (\r\n are added programmatically)
 

@@ -118,10 +118,10 @@ class Engine: NSObject {
         
         var incJ:Int = 0
         
-        for var i:Int = 0 ; i < nbRowSource; i++
+        for _:Int in 0  ..< nbRowSource
         {
             var matrixTmp:Array<String> = Array<String>()
-            for var j:Int = incJ ; j < source.count ; j++
+            for j:Int in incJ  ..< source.count
             {
                 matrixTmp.append(source[j])
             }
@@ -129,12 +129,12 @@ class Engine: NSObject {
             let delta:Int = nbRowSource - (nbRowSource - incJ)
             if(delta > 0)
             {
-                for var k:Int = 0 ; k < delta ; k++
+                for k:Int in 0  ..< delta
                 {
                     matrixTmp.append(source[k])
                 }
             }
-            incJ++
+            incJ += 1
             
             matrix.append(matrixTmp)
         }
@@ -152,7 +152,7 @@ class Engine: NSObject {
         
         var incKey:Int = 0
         
-        for var i:Int = 0 ; i < arrayStrToEncrypt.count ; i++
+        for i:Int in 0  ..< arrayStrToEncrypt.count
         {
             //On récupère l'index de la première lettre de la clé dans le tableau source
             let indexKey:Int! = self.source.indexOf(arrayKey[incKey])
@@ -178,7 +178,7 @@ class Engine: NSObject {
             strCrypted += letterCrypted
             
             
-            incKey++
+            incKey += 1
             
             if(incKey == arrayKey.count)
             {
@@ -198,7 +198,7 @@ class Engine: NSObject {
         
         var incKey:Int = 0
         
-        for var i:Int = 0 ; i < arrayStrToDecrypt.count ; i++
+        for i:Int in 0  ..< arrayStrToDecrypt.count
         {
             //On récupère l'index de la première lettre de la clé dans le tableau source
             let indexKey:Int! = self.source.indexOf(arrayKey[incKey])
@@ -222,7 +222,7 @@ class Engine: NSObject {
             
             strDecrypted += letterDecrypted
             
-            incKey++
+            incKey += 1
             
             if(incKey == arrayKey.count)
             {

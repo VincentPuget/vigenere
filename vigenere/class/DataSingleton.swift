@@ -53,12 +53,12 @@ class DataSingleton: NSObject
     
     func createDefaultMatrix() -> Bool
     {
-        return DataSingleton.instance.saveNewMatrix("Matrice1", matrix: "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz@&é\"'(§è!çà)-_°0987654321#$ù%=+:/;.,?\\âêûîôäëüïöÂÊÛÎÔÄËÜÏÖ£`’ €÷*|")
+        return DataSingleton.instance.saveNewMatrix("Matrice1", matrix: "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz@&é\"'(§è!çà)-_°0987654321#$ù%=+:/;.,?\\âêûîôäëüïöÂÊÛÎÔÄËÜÏÖ£`’ €÷*|~⇒…{}[]")
     }
     
     func setDefaultMatrix(matrixObj:Matrix!) -> Bool
     {
-        return DataSingleton.instance.saveThisMatrix(matrixObj, name: matrixObj.name, matrix: "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz@&é\"'(§è!çà)-_°0987654321#$ù%=+:/;.,?\\âêûîôäëüïöÂÊÛÎÔÄËÜÏÖ£`’ €÷*|")
+        return DataSingleton.instance.saveThisMatrix(matrixObj, name: matrixObj.name, matrix: "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz@&é\"'(§è!çà)-_°0987654321#$ù%=+:/;.,?\\âêûîôäëüïöÂÊÛÎÔÄËÜÏÖ£`’ €÷*|~⇒…{}[]")
     }
     
     func getMatrixObject() -> Matrix?

@@ -1,7 +1,13 @@
 # vigenere
 Encrypt and decrypt text from with vigenere algorithm
 
-## Default matrix
+## Firt launch
+At first launch, the reference matrix for encrypt and decrypt is empty.
+Click on matrix button. An pop up window will appear.
+Set name and enter any caracter you want in the second field.
+Click on save button to save the matrix.
+
+Example of matrix
 ```text
 ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz@&é"'(§è!çà)-_°0987654321#$ù%=+:/;.,?\âêûîôäëüïöÂÊÛÎÔÄËÜÏÖ£`’ €÷*|~⇒…{}[]
 ```

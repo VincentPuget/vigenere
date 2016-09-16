@@ -24,12 +24,12 @@ class DataSingleton: NSObject
     
     func dropAllMatrix()
     {
-        let fetchRequestMatrix = NSFetchRequest(entityName: "Matrix");
-        if let fetchResultMatrix = (try? self.managedObjectContext!.executeFetchRequest(fetchRequestMatrix)) as? [Matrix]
+        let fetchRequestMatrix = NSFetchRequest<NSFetchRequestResult>(entityName: "Matrix")
+        if let fetchResultMatrix = (try? self.managedObjectContext!.fetch(fetchRequestMatrix)) as? [Matrix]
         {
             for data:AnyObject in fetchResultMatrix
             {
-                self.managedObjectContext!.deleteObject(data as! Matrix)
+                self.managedObjectContext!.delete(data as! Matrix)
             }
         }
         
@@ -43,11 +43,11 @@ class DataSingleton: NSObject
         
         if let err = error
         {
-            L.v(err.localizedFailureReason);
+            L.v(err.localizedFailureReason as AnyObject!);
         }
         else
         {
-            L.v("DROP Matrix OK")
+            L.v("DROP Matrix OK" as AnyObject!)
         }
     }
     
@@ -56,7 +56,7 @@ class DataSingleton: NSObject
         return DataSingleton.instance.saveNewMatrix("Matrice1", matrix: "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz@&é\"'(§è!çà)-_°0987654321#$ù%=+:/;.,?\\âêûîôäëüïöÂÊÛÎÔÄËÜÏÖ£`’ €÷*|~⇒…{}[]")
     }
     
-    func setDefaultMatrix(matrixObj:Matrix!) -> Bool
+    func setDefaultMatrix(_ matrixObj:Matrix!) -> Bool
     {
         return DataSingleton.instance.saveThisMatrix(matrixObj, name: matrixObj.name, matrix: "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz@&é\"'(§è!çà)-_°0987654321#$ù%=+:/;.,?\\âêûîôäëüïöÂÊÛÎÔÄËÜÏÖ£`’ €÷*|~⇒…{}[]")
     }
@@ -64,10 +64,10 @@ class DataSingleton: NSObject
     func getMatrixObject() -> Matrix?
     {
         var matrix:Matrix?;
+      
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Matrix")
         
-        let fetchRequest = NSFetchRequest(entityName: "Matrix");
-        
-        if let fetchResults = (try? self.managedObjectContext!.executeFetchRequest(fetchRequest)) as? [Matrix]
+        if let fetchResults = (try? self.managedObjectContext!.fetch(fetchRequest)) as? [Matrix]
         {
             if(fetchResults.count > 0)
             {
@@ -77,11 +77,11 @@ class DataSingleton: NSObject
         return matrix;
     }
     
-    func saveNewMatrix(name:String! , matrix:String!) -> Bool
+    func saveNewMatrix(_ name:String! , matrix:String!) -> Bool
     {
         var result:Bool! = false;
         
-        let newMatrixObj:Matrix! = NSEntityDescription.insertNewObjectForEntityForName("Matrix", inManagedObjectContext: self.managedObjectContext!) as! Matrix
+        let newMatrixObj:Matrix! = NSEntityDescription.insertNewObject(forEntityName: "Matrix", into: self.managedObjectContext!) as! Matrix
         newMatrixObj.name = name;
         newMatrixObj.matrix = matrix;
         
@@ -95,11 +95,11 @@ class DataSingleton: NSObject
         
         if let err = error
         {
-            L.v(err.localizedFailureReason);
+            L.v(err.localizedFailureReason as AnyObject!);
         }
         else
         {
-            L.v("Save new matrix OK")
+            L.v("Save new matrix OK" as AnyObject!)
             
             result = true;
         }
@@ -107,7 +107,7 @@ class DataSingleton: NSObject
         return result
     }
     
-    func saveThisMatrix(matrixObj:Matrix! , name:String! , matrix:String!) -> Bool
+    func saveThisMatrix(_ matrixObj:Matrix! , name:String! , matrix:String!) -> Bool
     {
         var result:Bool! = false;
         
@@ -124,11 +124,11 @@ class DataSingleton: NSObject
         
         if let err = error
         {
-            L.v(err.localizedFailureReason);
+            L.v(err.localizedFailureReason as AnyObject!);
         }
         else
         {
-            L.v("Save this matrix OK")
+            L.v("Save this matrix OK" as AnyObject!)
             
             result = true;
         }
@@ -138,30 +138,30 @@ class DataSingleton: NSObject
     
     // MARK: - Core Data stack
     
-    lazy var applicationDocumentsDirectory: NSURL = {
+    lazy var applicationDocumentsDirectory: URL = {
         // The directory the application uses to store the Core Data store file. This code uses a directory named "mao.macos.Vigenere" in the user's Application Support directory.
-        let urls = NSFileManager.defaultManager().URLsForDirectory(.ApplicationSupportDirectory, inDomains: .UserDomainMask)
+        let urls = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask)
         let appSupportURL = urls[urls.count - 1] 
-        return appSupportURL.URLByAppendingPathComponent("mao.macos.Vigenere")
+        return appSupportURL.appendingPathComponent("mao.macos.Vigenere")
         }()
     
     lazy var managedObjectModel: NSManagedObjectModel = {
         // The managed object model for the application. This property is not optional. It is a fatal error for the application not to be able to find and load its model.
-        let modelURL = NSBundle.mainBundle().URLForResource("Vigenere", withExtension: "momd")!
-        return NSManagedObjectModel(contentsOfURL: modelURL)!
+        let modelURL = Bundle.main.url(forResource: "Vigenere", withExtension: "momd")!
+        return NSManagedObjectModel(contentsOf: modelURL)!
         }()
     
     lazy var persistentStoreCoordinator: NSPersistentStoreCoordinator? = {
         // The persistent store coordinator for the application. This implementation creates and return a coordinator, having added the store for the application to it. (The directory for the store is created, if necessary.) This property is optional since there are legitimate error conditions that could cause the creation of the store to fail.
-        let fileManager = NSFileManager.defaultManager()
+        let fileManager = FileManager.default
         var shouldFail = false
         var error: NSError? = nil
         var failureReason = "There was an error creating or loading the application's saved data."
         
         // Make sure the application files directory is there
-        let propertiesOpt: [NSObject: AnyObject]?
+        let propertiesOpt: [AnyHashable: Any]?
         do {
-            propertiesOpt = try self.applicationDocumentsDirectory.resourceValuesForKeys([NSURLIsDirectoryKey])
+            propertiesOpt = try (self.applicationDocumentsDirectory as NSURL).resourceValues(forKeys: [URLResourceKey.isDirectoryKey])
         } catch var error1 as NSError {
             error = error1
             propertiesOpt = nil
@@ -169,14 +169,14 @@ class DataSingleton: NSObject
             fatalError()
         }
         if let properties = propertiesOpt {
-            if !properties[NSURLIsDirectoryKey]!.boolValue {
+            if !(properties[URLResourceKey.isDirectoryKey]! as AnyObject).boolValue {
                 failureReason = "Expected a folder to store application data, found a file \(self.applicationDocumentsDirectory.path)."
                 shouldFail = true
             }
         } else if error!.code == NSFileReadNoSuchFileError {
             error = nil
             do {
-                try fileManager.createDirectoryAtPath(self.applicationDocumentsDirectory.path!, withIntermediateDirectories: true, attributes: nil)
+                try fileManager.createDirectory(atPath: self.applicationDocumentsDirectory.path, withIntermediateDirectories: true, attributes: nil)
             } catch var error1 as NSError {
                 error = error1
             } catch {
@@ -188,9 +188,9 @@ class DataSingleton: NSObject
         var coordinator: NSPersistentStoreCoordinator?
         if !shouldFail && (error == nil) {
             coordinator = NSPersistentStoreCoordinator(managedObjectModel: self.managedObjectModel)
-            let url = self.applicationDocumentsDirectory.URLByAppendingPathComponent("Vigenere.storedata")
+            let url = self.applicationDocumentsDirectory.appendingPathComponent("Vigenere.storedata")
             do {
-                try coordinator!.addPersistentStoreWithType(NSXMLStoreType, configuration: nil, URL: url, options: nil)
+                try coordinator!.addPersistentStore(ofType: NSXMLStoreType, configurationName: nil, at: url, options: nil)
             } catch var error1 as NSError {
                 error = error1
                 coordinator = nil
@@ -202,13 +202,13 @@ class DataSingleton: NSObject
         if shouldFail || (error != nil) {
             // Report any error we got.
             var dict = [String: AnyObject]()
-            dict[NSLocalizedDescriptionKey] = "Failed to initialize the application's saved data"
-            dict[NSLocalizedFailureReasonErrorKey] = failureReason
+            dict[NSLocalizedDescriptionKey] = "Failed to initialize the application's saved data" as AnyObject?
+            dict[NSLocalizedFailureReasonErrorKey] = failureReason as AnyObject?
             if error != nil {
                 dict[NSUnderlyingErrorKey] = error
             }
             error = NSError(domain: "YOUR_ERROR_DOMAIN", code: 9999, userInfo: dict)
-            NSApplication.sharedApplication().presentError(error!)
+            NSApplication.shared().presentError(error!)
             return nil
         } else {
             return coordinator
@@ -228,11 +228,11 @@ class DataSingleton: NSObject
     
     // MARK: - Core Data Saving and Undo support
     
-    @IBAction func saveAction(sender: AnyObject!) {
+    @IBAction func saveAction(_ sender: AnyObject!) {
         // Performs the save action for the application, which is to send the save: message to the application's managed object context. Any encountered errors are presented to the user.
         if let moc = self.managedObjectContext {
             if !moc.commitEditing() {
-                NSLog("\(NSStringFromClass(self.dynamicType)) unable to commit editing before saving")
+                NSLog("\(NSStringFromClass(type(of: self))) unable to commit editing before saving")
             }
             var error: NSError? = nil
             if moc.hasChanges {
@@ -240,13 +240,13 @@ class DataSingleton: NSObject
                     try moc.save()
                 } catch let error1 as NSError {
                     error = error1
-                    NSApplication.sharedApplication().presentError(error!)
+                    NSApplication.shared().presentError(error!)
                 }
             }
         }
     }
     
-    func windowWillReturnUndoManager(window: NSWindow) -> NSUndoManager? {
+    func windowWillReturnUndoManager(_ window: NSWindow) -> UndoManager? {
         // Returns the NSUndoManager for the application. In this case, the manager returned is that of the managed object context for the application.
         if let moc = self.managedObjectContext {
             return moc.undoManager
@@ -255,17 +255,17 @@ class DataSingleton: NSObject
         }
     }
     
-    func applicationShouldTerminate(sender: NSApplication) -> NSApplicationTerminateReply {
+    func applicationShouldTerminate(_ sender: NSApplication) -> NSApplicationTerminateReply {
         // Save changes in the application's managed object context before the application terminates.
         
         if let moc = managedObjectContext {
             if !moc.commitEditing() {
-                NSLog("\(NSStringFromClass(self.dynamicType)) unable to commit editing to terminate")
-                return .TerminateCancel
+                NSLog("\(NSStringFromClass(type(of: self))) unable to commit editing to terminate")
+                return .terminateCancel
             }
             
             if !moc.hasChanges {
-                return .TerminateNow
+                return .terminateNow
             }
             
             var error: NSError? = nil
@@ -276,7 +276,7 @@ class DataSingleton: NSObject
                 // Customize this code block to include application-specific recovery steps.
                 let result = sender.presentError(error!)
                 if (result) {
-                    return .TerminateCancel
+                    return .terminateCancel
                 }
                 
                 let question = NSLocalizedString("Could not save changes while quitting. Quit anyway?", comment: "Quit without saves error question message")
@@ -286,17 +286,17 @@ class DataSingleton: NSObject
                 let alert = NSAlert()
                 alert.messageText = question
                 alert.informativeText = info
-                alert.addButtonWithTitle(quitButton)
-                alert.addButtonWithTitle(cancelButton)
+                alert.addButton(withTitle: quitButton)
+                alert.addButton(withTitle: cancelButton)
                 
                 let answer = alert.runModal()
                 if answer == NSAlertFirstButtonReturn {
-                    return .TerminateCancel
+                    return .terminateCancel
                 }
             }
         }
         // If we got here, it is time to quit.
-        return .TerminateNow
+        return .terminateNow
     }
     
 }

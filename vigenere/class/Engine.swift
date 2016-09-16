@@ -12,7 +12,7 @@ protocol EngineProtocol
 {
     func matrixNotExist() -> Void
     func matrixIsCreated() -> Void
-    func outputUpdated(output:String!) -> Void
+    func outputUpdated(_ output:String!) -> Void
 }
 
 class Engine: NSObject {
@@ -90,7 +90,7 @@ class Engine: NSObject {
         return sourceTmp;
     }
     
-    func encryptOrDecrypt(input:String! , key:String! , isEncrypt:Bool!)
+    func encryptOrDecrypt(_ input:String! , key:String! , isEncrypt:Bool!)
     {
         var output:String = ""
         
@@ -111,7 +111,7 @@ class Engine: NSObject {
         self.delegate.outputUpdated(output)
     }
     
-    func createMatrix(source:Array<String>) -> Array<Array<String>> {
+    func createMatrix(_ source:Array<String>) -> Array<Array<String>> {
         let nbRowSource:Int = source.count
         
         var matrix:Array<Array<String>> = Array<Array<String>>()
@@ -142,7 +142,7 @@ class Engine: NSObject {
         return matrix
     }
     
-    func encrypt(str:String , key:String) -> String {
+    func encrypt(_ str:String , key:String) -> String {
         
         let arrayStrToEncrypt:Array<String> = str.characters.map { String($0) }
         
@@ -155,7 +155,7 @@ class Engine: NSObject {
         for i:Int in 0  ..< arrayStrToEncrypt.count
         {
             //On récupère l'index de la première lettre de la clé dans le tableau source
-            let indexKey:Int! = self.source.indexOf(arrayKey[incKey])
+            let indexKey:Int! = self.source.index(of: arrayKey[incKey])
             if(indexKey == nil)
             {
                 return NSLocalizedString("warningMissingCharMatrix", tableName: "LocalizableStrings", comment: "warningMissingCharMatrix")
@@ -165,7 +165,7 @@ class Engine: NSObject {
             var rowMatrix:Array<String> = self.matrix[indexKey]
             
             //On récupère l'index de la première lettre de la phrase à crypté dans le tableau source
-            let indexStr:Int! = self.source.indexOf(arrayStrToEncrypt[i]);
+            let indexStr:Int! = self.source.index(of: arrayStrToEncrypt[i]);
             
             if(indexStr == nil)
             {
@@ -189,7 +189,7 @@ class Engine: NSObject {
         return strCrypted
     }
     
-    func decrypt(str:String , key:String) -> String {
+    func decrypt(_ str:String , key:String) -> String {
         let arrayStrToDecrypt:Array<String> = str.characters.map { String($0) }
         
         let arrayKey:Array<String> = key.characters.map { String($0) }
@@ -201,7 +201,7 @@ class Engine: NSObject {
         for i:Int in 0  ..< arrayStrToDecrypt.count
         {
             //On récupère l'index de la première lettre de la clé dans le tableau source
-            let indexKey:Int! = self.source.indexOf(arrayKey[incKey])
+            let indexKey:Int! = self.source.index(of: arrayKey[incKey])
             if(indexKey == nil)
             {
                 return NSLocalizedString("warningMissingCharMatrix", tableName: "LocalizableStrings", comment: "warningMissingCharMatrix")
@@ -211,7 +211,7 @@ class Engine: NSObject {
             let rowMatrix:Array<String> = self.matrix[indexKey]
             
             //On récupère l'index de la lettre de la phrase à decrypté dans le tableau fournis par l'index de la clé
-            let indexStr:Int! = rowMatrix.indexOf(arrayStrToDecrypt[i])
+            let indexStr:Int! = rowMatrix.index(of: arrayStrToDecrypt[i])
             if(indexStr == nil)
             {
                 return NSLocalizedString("warningMissingCharMatrix", tableName: "LocalizableStrings", comment: "warningMissingCharMatrix")

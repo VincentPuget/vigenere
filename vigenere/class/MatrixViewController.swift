@@ -10,7 +10,7 @@ import Cocoa
 
 protocol MatrixProtocol
 {
-    func matrixIsAvailable(isAvailable:Bool!) -> Void
+    func matrixIsAvailable(_ isAvailable:Bool!) -> Void
 }
 
 class MatrixViewController: NSViewController {
@@ -30,30 +30,30 @@ class MatrixViewController: NSViewController {
     
     override func viewWillAppear() {
         self.view.wantsLayer = true
-        self.view.layer?.backgroundColor = NSColor(calibratedRed: 69/255, green: 69/255, blue: 69/255, alpha: 1).CGColor
+        self.view.layer?.backgroundColor = NSColor(calibratedRed: 69/255, green: 69/255, blue: 69/255, alpha: 1).cgColor
         
-        self.viewBackground.layer?.backgroundColor = NSColor(calibratedRed: 35/255, green: 35/255, blue: 35/255, alpha: 1).CGColor
+        self.viewBackground.layer?.backgroundColor = NSColor(calibratedRed: 35/255, green: 35/255, blue: 35/255, alpha: 1).cgColor
         
-        self.tvMatrix.textColor = NSColor.whiteColor()
-        self.tvMatrix.insertionPointColor = NSColor.whiteColor()
+        self.tvMatrix.textColor = NSColor.white
+        self.tvMatrix.insertionPointColor = NSColor.white
         
-        let color = NSColor.grayColor()
+        let color = NSColor.gray
         let attrs = [NSForegroundColorAttributeName: color]
         let placeHolderStr = NSAttributedString(string: NSLocalizedString("matrixName", tableName: "LocalizableStrings", comment: "Matrix name"), attributes: attrs)
         self.tfMatrixName.placeholderAttributedString = placeHolderStr
-        self.tfMatrixName.focusRingType = NSFocusRingType.None
-        let fieldEditor: NSTextView! = self.tfMatrixName.window?.fieldEditor(true, forObject: self.tfMatrixName) as! NSTextView
-        fieldEditor.insertionPointColor = NSColor.whiteColor()
+        self.tfMatrixName.focusRingType = NSFocusRingType.none
+        let fieldEditor: NSTextView! = self.tfMatrixName.window?.fieldEditor(true, for: self.tfMatrixName) as! NSTextView
+        fieldEditor.insertionPointColor = NSColor.white
         
         let pstyle = NSMutableParagraphStyle()
-        pstyle.alignment = NSTextAlignment.Center
-        self.buttonValidate.attributedTitle = NSAttributedString(string: NSLocalizedString("save", tableName: "LocalizableStrings", comment: "Save"), attributes: [ NSForegroundColorAttributeName : NSColor.whiteColor(), NSParagraphStyleAttributeName : pstyle ])
-        self.buttonCancel.attributedTitle = NSAttributedString(string: NSLocalizedString("cancel", tableName: "LocalizableStrings", comment: "Cancel"), attributes: [ NSForegroundColorAttributeName : NSColor.whiteColor(), NSParagraphStyleAttributeName : pstyle ])
+        pstyle.alignment = NSTextAlignment.center
+        self.buttonValidate.attributedTitle = NSAttributedString(string: NSLocalizedString("save", tableName: "LocalizableStrings", comment: "Save"), attributes: [ NSForegroundColorAttributeName : NSColor.white, NSParagraphStyleAttributeName : pstyle ])
+        self.buttonCancel.attributedTitle = NSAttributedString(string: NSLocalizedString("cancel", tableName: "LocalizableStrings", comment: "Cancel"), attributes: [ NSForegroundColorAttributeName : NSColor.white, NSParagraphStyleAttributeName : pstyle ])
         
-        let widthConstraint = NSLayoutConstraint(item: self.view, attribute: NSLayoutAttribute.Width, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1, constant: 460)
+        let widthConstraint = NSLayoutConstraint(item: self.view, attribute: NSLayoutAttribute.width, relatedBy: NSLayoutRelation.equal, toItem: nil, attribute: NSLayoutAttribute.notAnAttribute, multiplier: 1, constant: 460)
         self.view.addConstraint(widthConstraint)
         
-        let heightConstraint = NSLayoutConstraint(item: self.view, attribute: NSLayoutAttribute.Height, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1, constant: 260)
+        let heightConstraint = NSLayoutConstraint(item: self.view, attribute: NSLayoutAttribute.height, relatedBy: NSLayoutRelation.equal, toItem: nil, attribute: NSLayoutAttribute.notAnAttribute, multiplier: 1, constant: 260)
         self.view.addConstraint(heightConstraint)
     }
     
@@ -61,7 +61,7 @@ class MatrixViewController: NSViewController {
         super.viewDidAppear()
         self.view.window?.title = "Vigenere"
         
-        self.view.window?.movableByWindowBackground = true
+        self.view.window?.isMovableByWindowBackground = true
         
         
         self.tfMatrixName.currentEditor()?.moveToEndOfLine(self)
@@ -90,10 +90,10 @@ class MatrixViewController: NSViewController {
     }
     
 
-    @IBAction func IBA_buttonCancel(sender: AnyObject) {
+    @IBAction func IBA_buttonCancel(_ sender: AnyObject) {
         self.dismissViewController(self)
     }
-    @IBAction func IBA_buttonValidate(sender: AnyObject) {
+    @IBAction func IBA_buttonValidate(_ sender: AnyObject) {
         var saveIsOk = false;
         if(self.isNewMatrix == true)
         {
@@ -110,17 +110,17 @@ class MatrixViewController: NSViewController {
 
 extension MatrixViewController: NSTextFieldDelegate {
     
-    override func controlTextDidChange(obj: NSNotification) {
+    override func controlTextDidChange(_ obj: Notification) {
         
     }
     
-    override func controlTextDidEndEditing(obj: NSNotification) {
+    override func controlTextDidEndEditing(_ obj: Notification) {
         
     }
 }
 
 extension MatrixViewController: NSTextViewDelegate {
-    func textDidChange(obj: NSNotification)
+    func textDidChange(_ obj: Notification)
     {
         
     }

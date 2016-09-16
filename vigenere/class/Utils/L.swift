@@ -10,7 +10,7 @@ import Cocoa
 
 struct L
 {
-    static func v(anyObjects:AnyObject!...) -> Void
+    static func v(_ anyObjects:AnyObject!...) -> Void
     {
         if(Const.App.DEBUG)
         {

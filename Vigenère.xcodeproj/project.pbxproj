@@ -238,6 +238,7 @@
 					8A6F8E5A1B7CCC5100E731C2 = {
 						CreatedOnToolsVersion = 6.4;
 						DevelopmentTeam = G6Y46S4A8Y;
+						LastSwiftMigration = 0800;
 						SystemCapabilities = {
 							com.apple.Sandbox = {
 								enabled = 1;
@@ -246,6 +247,7 @@
 					};
 					8A6F8E6F1B7CCC5100E731C2 = {
 						CreatedOnToolsVersion = 6.4;
+						LastSwiftMigration = 0800;
 						TestTargetID = 8A6F8E5A1B7CCC5100E731C2;
 					};
 				};
@@ -440,6 +442,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = mao.macos.vigenere;
 				PRODUCT_NAME = "Vigenère";
 				PROVISIONING_PROFILE = "";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -457,6 +460,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = mao.macos.vigenere;
 				PRODUCT_NAME = "Vigenère";
 				PROVISIONING_PROFILE = "";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -477,6 +481,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "mao.macos.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "Vigenère";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Vigenère.app/Contents/MacOS/Vigenère";
 			};
 			name = Debug;
@@ -494,6 +499,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "mao.macos.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "Vigenère";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Vigenère.app/Contents/MacOS/Vigenère";
 			};
 			name = Release;

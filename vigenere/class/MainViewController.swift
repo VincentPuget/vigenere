@@ -32,40 +32,40 @@ class MainViewController: NSViewController {
     
     override func viewWillAppear() {
         self.view.wantsLayer = true
-        self.view.layer?.backgroundColor = NSColor(calibratedRed: 69/255, green: 69/255, blue: 69/255, alpha: 1).CGColor
+        self.view.layer?.backgroundColor = NSColor(calibratedRed: 69/255, green: 69/255, blue: 69/255, alpha: 1).cgColor
         
-        self.splitView.layer?.backgroundColor = NSColor(calibratedRed: 35/255, green: 35/255, blue: 35/255, alpha: 1).CGColor
+        self.splitView.layer?.backgroundColor = NSColor(calibratedRed: 35/255, green: 35/255, blue: 35/255, alpha: 1).cgColor
         
         //le reste dans le storyboard
-        self.tvInput.textColor = NSColor.whiteColor()
-        self.tvInput.insertionPointColor = NSColor.whiteColor()
+        self.tvInput.textColor = NSColor.white
+        self.tvInput.insertionPointColor = NSColor.white
         
         self.scCrypt.setLabel(NSLocalizedString("encrypt", tableName: "LocalizableStrings", comment: "encrypt"), forSegment: 0)
         self.scCrypt.setLabel(NSLocalizedString("decrypt", tableName: "LocalizableStrings", comment: "decrypt"), forSegment: 1)
         
-        let color = NSColor.grayColor()
+        let color = NSColor.gray
         let attrs = [NSForegroundColorAttributeName: color]
         let placeHolderStr = NSAttributedString(string: NSLocalizedString("key", tableName: "LocalizableStrings", comment: "key"), attributes: attrs)
         self.tfKey.placeholderAttributedString = placeHolderStr
-        self.tfKey.focusRingType = NSFocusRingType.None
-        let fieldEditor: NSTextView! = self.tfKey.window?.fieldEditor(true, forObject: self.tfKey) as! NSTextView
-        fieldEditor.insertionPointColor = NSColor.whiteColor()
+        self.tfKey.focusRingType = NSFocusRingType.none
+        let fieldEditor: NSTextView! = self.tfKey.window?.fieldEditor(true, for: self.tfKey) as! NSTextView
+        fieldEditor.insertionPointColor = NSColor.white
         
         self.tvInput.string = NSLocalizedString("textHere", tableName: "LocalizableStrings", comment: "textHere")
         
-        self.tvOutput.textColor = NSColor.whiteColor()
-        self.tvOutput.insertionPointColor = NSColor.whiteColor()
+        self.tvOutput.textColor = NSColor.white
+        self.tvOutput.insertionPointColor = NSColor.white
         
         let pstyle = NSMutableParagraphStyle()
-        pstyle.alignment = NSTextAlignment.Center
-        self.buttonQuit.attributedTitle = NSAttributedString(string: NSLocalizedString("x", tableName: "LocalizableStrings", comment: "x"), attributes: [ NSForegroundColorAttributeName : NSColor.whiteColor(), NSParagraphStyleAttributeName : pstyle ])
-        self.buttonMatrix.attributedTitle = NSAttributedString(string: NSLocalizedString("matrix", tableName: "LocalizableStrings", comment: "Matrix"), attributes: [ NSForegroundColorAttributeName : NSColor.whiteColor(), NSParagraphStyleAttributeName : pstyle ])
+        pstyle.alignment = NSTextAlignment.center
+        self.buttonQuit.attributedTitle = NSAttributedString(string: NSLocalizedString("x", tableName: "LocalizableStrings", comment: "x"), attributes: [ NSForegroundColorAttributeName : NSColor.white, NSParagraphStyleAttributeName : pstyle ])
+        self.buttonMatrix.attributedTitle = NSAttributedString(string: NSLocalizedString("matrix", tableName: "LocalizableStrings", comment: "Matrix"), attributes: [ NSForegroundColorAttributeName : NSColor.white, NSParagraphStyleAttributeName : pstyle ])
     }
 
     override func viewDidAppear() {
         super.viewDidAppear()
         self.view.window?.title = "Vigenere"
-        self.view.window?.movableByWindowBackground = true
+        self.view.window?.isMovableByWindowBackground = true
         
         engine = Engine()
         engine.delegate = self;
@@ -86,7 +86,7 @@ class MainViewController: NSViewController {
         self.tvInput.becomeFirstResponder()
     }
     
-    override func prepareForSegue(segue:(NSStoryboardSegue!), sender: AnyObject!)
+    override func prepare(for segue:(NSStoryboardSegue!), sender: Any!)
     {
         if (segue.identifier == "segue_MatrixViewController")
         {
@@ -96,7 +96,7 @@ class MainViewController: NSViewController {
     }
     
 
-    @IBAction func IBA_scCrypt(sender: AnyObject) {
+    @IBAction func IBA_scCrypt(_ sender: AnyObject) {
         let scTmp:NSSegmentedControl! = sender as! NSSegmentedControl
         switch scTmp.selectedSegment
         {
@@ -113,8 +113,8 @@ class MainViewController: NSViewController {
         engine.encryptOrDecrypt(self.textInput, key: self.textKey , isEncrypt: self.isEncrypt)
     }
     
-    @IBAction func IBA_buttonQuit(sender: AnyObject) {
-        NSApplication.sharedApplication().terminate(self)
+    @IBAction func IBA_buttonQuit(_ sender: AnyObject) {
+        NSApplication.shared().terminate(self)
     }
 }
 
@@ -125,14 +125,14 @@ extension MainViewController {
         let alert: NSAlert = NSAlert()
         alert.messageText = NSLocalizedString("alertMatrixIsEmpty", tableName: "LocalizableStrings", comment: "alertMatrixIsEmpty")
         alert.informativeText = "Vigenere"
-        alert.alertStyle = NSAlertStyle.WarningAlertStyle
-        alert.addButtonWithTitle(NSLocalizedString("ok", tableName: "LocalizableStrings", comment: "ok"))
-        alert.addButtonWithTitle(NSLocalizedString("cancel", tableName: "LocalizableStrings", comment: "cancel"))
+        alert.alertStyle = NSAlertStyle.warning
+        alert.addButton(withTitle: NSLocalizedString("ok", tableName: "LocalizableStrings", comment: "ok"))
+        alert.addButton(withTitle: NSLocalizedString("cancel", tableName: "LocalizableStrings", comment: "cancel"))
         let response = alert.runModal()
         
         if(response == NSAlertFirstButtonReturn)
         {
-            self.performSegueWithIdentifier("segue_MatrixViewController", sender: self)
+            self.performSegue(withIdentifier: "segue_MatrixViewController", sender: self)
         }
         else if(response == NSAlertSecondButtonReturn)
         {
@@ -140,7 +140,7 @@ extension MainViewController {
         }
     }
     
-    func valueHandler(obj: NSNotification){
+    func valueHandler(_ obj: Notification){
         if(obj.object is NSTextField){
             let tfTmp = obj.object as! NSTextField;
             self.textKey = tfTmp.stringValue
@@ -156,17 +156,17 @@ extension MainViewController {
 
 extension MainViewController: NSTextFieldDelegate {
     
-    override func controlTextDidChange(obj: NSNotification) {
+    override func controlTextDidChange(_ obj: Notification) {
         self.valueHandler(obj)
     }
     
-    override func controlTextDidEndEditing(obj: NSNotification) {
+    override func controlTextDidEndEditing(_ obj: Notification) {
         self.valueHandler(obj)
     }
 }
 
 extension MainViewController: NSTextViewDelegate {
-    func textDidChange(obj: NSNotification)
+    func textDidChange(_ obj: Notification)
     {
         self.valueHandler(obj)
     }
@@ -175,7 +175,7 @@ extension MainViewController: NSTextViewDelegate {
 extension MainViewController: EngineProtocol{
     func matrixNotExist()
     {
-        L.v("matrixIsEmpty");
+        L.v("matrixIsEmpty" as AnyObject!);
         self.alertMatrixEmpty()
     }
     
@@ -187,7 +187,7 @@ extension MainViewController: EngineProtocol{
         engine.encryptOrDecrypt(self.textInput, key: self.textKey , isEncrypt: self.isEncrypt)
     }
     
-    func outputUpdated(output:String!)
+    func outputUpdated(_ output:String!)
     {
         self.tvOutput.string = output
     }
@@ -195,7 +195,7 @@ extension MainViewController: EngineProtocol{
 
 extension MainViewController: MatrixProtocol {
     
-    func matrixIsAvailable(isAvailable:Bool!) -> Void
+    func matrixIsAvailable(_ isAvailable:Bool!) -> Void
     {
         if(isAvailable == true)
         {
